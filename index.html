@@ -2,7 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Bundled Page</title>
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23B4552E'/%3E%3Cpath d='M20 7v12.2a4.2 4.2 0 1 1-2-3.58V9l8-2v10.2a4.2 4.2 0 1 1-2-3.58V9.55L20 10.6V7z' fill='%23FAF5EE'/%3E%3C/svg%3E">
+  <title>Catálogo de coreografías | Marilynas Online</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { background: #FAF5EE; display: flex; align-items: center; justify-content: center; min-height: 100vh; font-family: -apple-system, BlinkMacSystemFont, sans-serif; }
@@ -47,6 +49,307 @@ document.addEventListener('DOMContentLoaded', async function() {
     return btoa(bin);
   }
 
+  // Ajustes editoriales solicitados para el catalogo de Marilynas Online.
+  // Se aplican sobre la plantilla desempaquetada para conservar este archivo
+  // autocontenido (tipografias y runtime incluidos).
+  function updateMarilynasCatalog(template) {
+    const LEVEL_BY_SONG = {
+      "Freedom": "Alta",
+      "Taste Of You (live at Sound Emporium)": "Suave",
+      "La Cintura": "Suave",
+      "Irresponsables": "Alta",
+      "Ay Amor": "Media",
+      "Clávame tu amor": "Media",
+      "Qué bonito": "Suave",
+      "Me Voy": "Media",
+      "Dancing With Myself": "Suave",
+      "All Shook Up": "Suave",
+      "Blinding Lights": "Media",
+      "I Just Might": "Media",
+      "24K Magic": "Alta",
+      "Finesse": "Suave",
+      "Treasure": "Alta",
+      "Astros": "Media",
+      "Terminales": "Media",
+      "Amigos Raros A Punto": "Suave",
+      "The Boss": "Media",
+      "September": "Media",
+      "The Loco-Motion": "Suave",
+      "Relax": "Suave",
+      "Love Kills": "Media",
+      "Good Times": "Suave",
+      "Givin' Up": "Suave",
+      "Bulletproof": "Suave",
+      "Gloria": "Suave",
+      "Lunes por la Madrugada": "Media",
+      "Hay Confusión": "Suave",
+      "Fantasmas": "Suave",
+      "Un Muchacho Como Yo": "Suave",
+      "Come With Me": "Media",
+      "Dame Más": "Alta",
+      "La Mordidita": "Media",
+      "Como le digo": "Suave",
+      "Dame el fuego de tu amor": "Media",
+      "If You Love Somebody Set Them Free": "Suave",
+      "Tú y Yo": "Media",
+      "I'm Your Baby Tonight": "Media",
+      "Yes Sir, I Can Boogie": "Suave",
+      "Copacabana": "Alta",
+      "Blame It On the Boogie": "Suave",
+      "Somos Dos": "Suave",
+      "Canción De Luna": "Suave",
+      "Love Will Keep Us Together": "Alta",
+      "That Man": "Alta",
+      "Salomé": "Alta",
+      "Oye El Boom": "Alta",
+      "Just a Gigolo": "Alta",
+      "Baile": "Alta",
+      "Levitating (feat. DaBaby)": "Media",
+      "One Kiss": "Media",
+      "Boogie Wonderland": "Media",
+      "I'm Still Standing": "Media",
+      "Bailando": "Alta",
+      "Hot2Touch": "Suave",
+      "I Was Born To Love You": "Alta",
+      "Freed From Desire": "Alta",
+      "Can't Take My Eyes Off You": "Media",
+      "Adrenalina": "Media",
+      "Grandes Bolas de Fuego": "Suave",
+      "Can't Stop the Feeling": "Alta",
+      "Love Never Felt So Good": "Media",
+      "DPM": "Suave",
+      "Si Antes Te Hubiera Conocido": "Suave",
+      "I Kissed A Girl": "Media",
+      "Ladies Night": "Suave",
+      "A Mi Manera": "Alta",
+      "Universo Paralelo": "Alta",
+      "BZRP": "Suave",
+      "Moving On Up": "Suave",
+      "Rescata Mi Corazón": "Media",
+      "Uptown Funk": "Alta",
+      "Makes Me Wonder": "Media",
+      "Flowers": "Suave",
+      "L-O-V-E": "Suave",
+      "Kissing Strangers": "Media",
+      "Happy": "Suave",
+      "Don't Stop Me Now": "Alta",
+      "Felicidad": "Media",
+      "Pedro": "Suave",
+      "Hit The Road Jack": "Media",
+      "Don't Worry": "Media",
+      "Vente Pa' Ca": "Suave",
+      "You Got It": "Suave",
+      "Smooth": "Alta",
+      "Man! I Feel Like A Woman": "Alta",
+      "Put a Lid On It": "Media",
+      "Isn't She Lovely": "Media",
+      "Ciudad Mágica": "Media",
+      "Muñequita Linda": "Media",
+      "I'm So Excited": "Media",
+      "You're No Good": "Media",
+      "Disco Inferno": "Media",
+      "Timber (ft. Kesha)": "Media",
+      "No se llama amor": "Media",
+      "Loco un poco": "Media",
+      "YMCA": "Suave",
+      "Wadu Wadu": "Suave"
+    };
+
+    const VIDEO_BY_SONG = {"Freedom":"0YZmgWq1qXs","Taste Of You (live at Sound Emporium)":"5fTvgUGzZh4","La Cintura":"Eg4LUvUjUWI","Irresponsables":"9mzv9R_Dq7M","Yes Sir, I Can Boogie":"zL831kQUbEo","Ay Amor":"nrmW5gVV1r0","Clávame tu amor":"wRcEb8OVPXM","Qué bonito":"boAit8_lWSo","Copacabana":"f_-_9GGl0_I","Me Voy":"mrWSU3hcpMc","Blame It On the Boogie":"pzS7zVNgWrg","Dancing With Myself":"FG1NrQYXjLU","All Shook Up":"IsktHpH5QGk","Blinding Lights":"fHI8X4OXluQ","Somos Dos":"g-_9Bld7JYc","24K Magic":"UqyT8IEBkvY","Finesse":"MRSaiAREnwI","I Just Might":"qCgAlb_3RD0","Treasure":"nPvuNsRccVw","Canción De Luna":"1dNwV1PQl3A","Love Will Keep Us Together":"_QNEf9oGw8o","That Man":"CFA6dEwWOb4","Salomé":"0qXynY77ZWA","Astros":"yQcaUpZZ-18","A mil":"VHXUKNxlz8M","Terminales":"2IwRDeyLL14","Oye El Boom":"GI1W5HEYPIk","Just a Gigolo":"rkdhhEjX-I0","Baile":"wRs4jYb43q0","Amigos Raros A Punto":"zSYAam9x7lU","The Boss":"NIW97Gjxbyc","Levitating (feat. DaBaby)":"PqbJJNuVMoc","One Kiss":"DkeiKbqa02g","Boogie Wonderland":"god7hAPv8f0","September":"Gs069dndIYk","I'm Still Standing":"MDPLNNYVvOA","Bailando":"N-g8WVs2UBE","The Loco-Motion":"POWsFzSFLCE","Hot2Touch":"rtfTKKCgD9c","Relax":"Yem_iEHiyJ0","I Was Born To Love You":"vNhhAEupU4g","Love Kills":"FhBkrlUiE7U","Freed From Desire":"p3l7fgvrEKM","Can't Take My Eyes Off You":"usccCsOdkM4","As It Was":"CjIUVRei27g","Good Times":"EFVVjYHrR1k","Adrenalina":"ME2Hufquz0k","Grandes Bolas de Fuego":"Jk3ZeA19CjY","Can't Stop the Feeling":"ExZ3OOPM1Vg","Love Never Felt So Good":"oG08ukJPtR8","DPM":"30bpKbrhqek","Givin' Up":"H-FpAABMjQs","Si Antes Te Hubiera Conocido":"MgsdDfdGdHc","I Kissed A Girl":"tAp9BKosZXs","Ladies Night":"1sF2YMvVWDg","A Mi Manera":"D29hIZKVdk8","Universo Paralelo":"T6Es4yNHEIM","Bulletproof":"CKeVQca3kQo","Gloria":"nNEb2k_EmMg","Lunes por la Madrugada":"bKK9daYWY2I","BZRP":"S3dU9etx_2k","Moving On Up":"FMS-6I2_wYM","Hay Confusión":"7YBIwDgz5rI","Rescata Mi Corazón":"bN-fd-U0PlM","Uptown Funk":"7Ya2U8XN_Zw","Makes Me Wonder":"6d_NfwquITA","Flowers":"SWpAYbgHmTo","Fantasmas":"0YkKqfod4jo","These Boots Are Made for Walkin'":"GM1kzbAgo_E","L-O-V-E":"f_HmF84G7ZY","Kissing Strangers":"o1A6nzb-Rxk","Un Muchacho Como Yo":"AlWP29_ygto","Happy":"4m-_cqRsoqA","Don't Stop Me Now":"MHi9mKq0slA","Felicidad":"Ok0fgaVqu3s","Pedro":"iMZOrEbS7cU","Hit The Road Jack":"uSiHqxgE2d0","Don't Worry":"y74UPiaK7u0","Come With Me":"Q6AOfdPhOHo","Dame Más":"QEqtT5qYHS8","La Mordidita":"lBztnahrOFw","Vente Pa' Ca":"NH-S3YLyWCQ","Como le digo":"cBQTqvlZbSo","You Got It":"CWWgblaW7w4","Dame el fuego de tu amor":"q_BOQDKIwEM","Smooth":"6Whgn_iE5uc","Man! I Feel Like A Woman":"ZJL4UGSbeFg","Isn't She Lovely":"kHInwkOJm24","If You Love Somebody Set Them Free":"P6mMoDUlV_U","Ciudad Mágica":"v3j1FXM2s94","Tú y Yo":"t01qcSJNJO8","Muñequita Linda":"pXxBozC-BnI","I'm So Excited":"8iwBM_YB1sE","You're No Good":"dr1sxkYmew4","Disco Inferno":"PgMSY8zQiMY","Timber (ft. Kesha)":"hHUbLv4ThOo","Put a Lid On It":"vrocSqxTTWg","No se llama amor":"Jc3__wMvrdo","Loco un poco":"71_ipsv8VNQ","YMCA":"CS9OO0S5w2k","Wadu Wadu":"iBCD4tsbHeE","I'm Your Baby Tonight":"8zX5ySLHW3Q","No voy en tren":"P3L10KNMptw"};
+
+    // Corrige la asignacion rojo/amarillo/verde segun el PDF de referencia.
+    template = template.replace(
+      /\["([^"]+)","([^"]+)","(Suave|Media|Alta)",(true|false)\]/g,
+      function(row, song, artist, oldLevel, ready) {
+        const level = LEVEL_BY_SONG[song] || oldLevel;
+        return '["' + song + '","' + artist + '","' + level + '",' + ready + ']';
+      }
+    );
+    template = template.replace(
+      "const HALO  = {Suave:'rgba(62,142,90,.18)', Media:'rgba(220,163,24,.18)', Alta:'rgba(193,69,44,.18)'};",
+      "const HALO  = {Suave:'rgba(62,142,90,.18)', Media:'rgba(220,163,24,.18)', Alta:'rgba(193,69,44,.18)'};\nconst VIDEO_BY_SONG = " + JSON.stringify(VIDEO_BY_SONG) + ";"
+    );
+    template = template.replace(
+      "ready:r[3]}))",
+      "ready:r[3], videoId:VIDEO_BY_SONG[r[0]] || ''}))"
+    );
+
+    // La lista del PDF incluye este tema, que no estaba cargado en la web.
+    const lauraRow = '["Gloria","Laura Branigan","Suave",true],';
+    if (template.includes(lauraRow) && !template.includes('["Lunes por la Madrugada"')) {
+      template = template.replace(
+        lauraRow,
+        lauraRow + '\n  ["Lunes por la Madrugada","Los Abuelos de la Nada","Media",false],'
+      );
+    }
+
+    // Suma una columna compacta para escuchar sin activar la seleccion de coreo.
+    template = template.replaceAll(
+      'grid-template-columns:14px minmax(0,1fr) 26px',
+      'grid-template-columns:14px minmax(0,1fr) 42px 26px'
+    );
+    template = template.replace(
+      'grid-template-columns:14px minmax(0,1fr) 42px 26px;gap:16px',
+      'grid-template-columns:14px minmax(0,1fr) 42px 26px;gap:12px'
+    );
+    template = template.replace(
+      '<span></span><span>Canción</span><span></span>',
+      '<span></span><span>Canción</span><span style="text-align:center">Audio</span><span></span>'
+    );
+    template = template.replace(
+      '<span style="{{ p.checkStyle }}">✓</span>',
+      '<button type="button" sc-camel-on-click="{{ p.listen }}" title="Escuchar {{ p.song }} aquí" aria-label="Escuchar {{ p.song }} aquí de {{ p.artist }}" style="width:34px;height:34px;display:grid;place-items:center;justify-self:center;border:1px solid rgba(34,30,26,.14);border-radius:50%;background:#FAF5EE;color:#B4552E;font:700 11px/1 system-ui,sans-serif;cursor:pointer;transition:.15s" style-hover="background:#B4552E;color:#FAF5EE;border-color:#B4552E">{{ p.playIcon }}</button>\n            <span style="{{ p.checkStyle }}">✓</span>\n            <sc-if value="{{ p.playerVisible }}" hint-placeholder-val="{{ false }}">\n              <div sc-camel-on-click="{{ p.stopAudioClick }}" style="grid-column:2/-1;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:12px;align-items:center;margin:2px 0 4px;padding:13px 14px;border-radius:14px;background:#F3EADC;cursor:default">\n                <div style="width:46px;height:46px;border-radius:10px;overflow:hidden;background:#E7DAC8;display:grid;place-items:center;color:#B4552E;font-size:17px"><sc-if value="{{ p.hasArtwork }}" hint-placeholder-val="{{ true }}"><img src="{{ p.audioArtwork }}" alt="" width="46" height="46" style="display:block;width:46px;height:46px;object-fit:cover"></sc-if><sc-if value="{{ p.noArtwork }}" hint-placeholder-val="{{ false }}">♫</sc-if></div>\n                <div style="min-width:0">\n                  <p style="margin:0 0 3px;font:600 12.5px/1.3 \'Work Sans\',system-ui,sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ p.audioTitle }}</p>\n                  <p style="margin:0 0 8px;font:400 11px/1.3 \'Work Sans\',system-ui,sans-serif;color:rgba(34,30,26,.52)">{{ p.audioMessage }}</p>\n                  <sc-if value="{{ p.playerReady }}" hint-placeholder-val="{{ true }}"><audio controls autoplay preload="none" src="{{ p.audioUrl }}" style="display:block;width:100%;height:32px;max-width:440px"></audio><p style="margin:7px 0 0;font:400 9.5px/1.3 \'Work Sans\',system-ui,sans-serif;color:rgba(34,30,26,.42)">Escuchando aquí · muestra de 30 segundos · <a href="{{ p.audioStoreUrl }}" target="_blank" rel="noopener" style="color:#B4552E;text-decoration:underline">Apple Music</a></p></sc-if>\n                </div>\n                <button type="button" sc-camel-on-click="{{ p.closeAudio }}" aria-label="Cerrar reproductor" style="align-self:start;width:28px;height:28px;border:0;border-radius:50%;background:rgba(34,30,26,.08);color:#221E1A;cursor:pointer;font:500 16px/1 system-ui,sans-serif">×</button>\n              </div>\n            </sc-if>'
+    );
+    template = template.replace(
+      /<sc-if value="\{\{ p\.playerVisible \}\}"[\s\S]*?\n              <\/div>\n            <\/sc-if>/,
+      '<sc-if value="{{ p.playerVisible }}" hint-placeholder-val="{{ false }}">\n              <div sc-camel-on-click="{{ p.stopAudioClick }}" style="grid-column:2/-1;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:start;margin:2px 0 4px;padding:13px 14px;border-radius:14px;background:#F3EADC;cursor:default">\n                <div style="min-width:0">\n                  <p style="margin:0 0 10px;font:600 12.5px/1.35 \'Work Sans\',system-ui,sans-serif;color:#221E1A">{{ p.song }} <span style="font-weight:400;color:rgba(34,30,26,.52)">· {{ p.artist }}</span></p>\n                  <div style="position:relative;width:100%;max-width:620px;aspect-ratio:16/9;overflow:hidden;border-radius:11px;background:#221E1A">\n                    <iframe src="{{ p.embedUrl }}" title="Reproductor de {{ p.song }}" referrerpolicy="strict-origin-when-cross-origin" allow="autoplay; encrypted-media; picture-in-picture; web-share" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;border:0"></iframe>\n                  </div>\n                  <p style="margin:8px 0 0;font:400 9.5px/1.3 \'Work Sans\',system-ui,sans-serif;color:rgba(34,30,26,.42)">La reproducción se mantiene dentro del catálogo.</p>\n                </div>\n                <button type="button" sc-camel-on-click="{{ p.closeAudio }}" aria-label="Cerrar reproductor" style="width:28px;height:28px;border:0;border-radius:50%;background:rgba(34,30,26,.08);color:#221E1A;cursor:pointer;font:500 16px/1 system-ui,sans-serif">×</button>\n              </div>\n            </sc-if>'
+    );
+    template = template.replace(
+      "checkStyle: 'text-align:right;font:600 13px \\\'Work Sans\\\',system-ui,sans-serif;transition:.15s;'\n            + (on ? 'color:#B4552E;opacity:1;' : 'color:rgba(34,30,26,.2);opacity:.45;'),\n          toggle: () => this.toggle(p.id)",
+      "checkStyle: 'text-align:right;font:600 13px \\\'Work Sans\\\',system-ui,sans-serif;transition:.15s;'\n            + (on ? 'color:#B4552E;opacity:1;' : 'color:rgba(34,30,26,.2);opacity:.45;'),\n          playerVisible: s.audioRowId === p.id,\n          playerReady: s.audioRowId === p.id && s.audioStatus === 'ready',\n          hasArtwork: s.audioRowId === p.id && !!s.audioArtwork,\n          noArtwork: s.audioRowId === p.id && !s.audioArtwork,\n          audioTitle: s.audioRowId === p.id ? s.audioTitle : p.song,\n          audioMessage: s.audioRowId === p.id ? (s.audioStatus === 'loading' ? 'Buscando la canción…' : (s.audioStatus === 'error' ? s.audioError : s.audioArtist)) : '',\n          audioUrl: s.audioRowId === p.id ? s.audioUrl : '',\n          audioStoreUrl: s.audioRowId === p.id ? s.audioStoreUrl : '#',\n          audioArtwork: s.audioRowId === p.id ? s.audioArtwork : '',\n          playIcon: s.audioRowId === p.id && s.audioStatus === 'loading' ? '…' : (s.audioRowId === p.id ? '♫' : '▶'),\n          listen: e => this.loadPreview(p, e),\n          closeAudio: e => {\n            if(e && e.preventDefault) e.preventDefault();\n            if(e && e.stopPropagation) e.stopPropagation();\n            this.previewRequest = (this.previewRequest || 0) + 1;\n            this.setState({audioRowId:null, audioStatus:'idle', audioUrl:'', audioStoreUrl:'', audioArtwork:'', audioError:''});\n          },\n          stopAudioClick: e => { if(e && e.stopPropagation) e.stopPropagation(); },\n          toggle: () => this.toggle(p.id)"
+    );
+    template = template.replace(
+      "playerVisible: s.audioRowId === p.id,",
+      "playerVisible: s.audioRowId === p.id,\n          embedUrl: s.audioRowId === p.id && p.videoId ? 'https://www.youtube.com/embed/' + p.videoId + '?autoplay=1&playsinline=1&rel=0&enablejsapi=1' + (/^https?:$/.test(window.location.protocol) ? '&origin=' + encodeURIComponent(window.location.origin) + '&widget_referrer=' + encodeURIComponent(window.location.href) : '') : '',"
+    );
+    template = template.replace(
+      "listen: e => this.loadPreview(p, e),",
+      "listen: e => {\n            if(e && e.preventDefault) e.preventDefault();\n            if(e && e.stopPropagation) e.stopPropagation();\n            this.previewRequest = (this.previewRequest || 0) + 1;\n            this.setState({audioRowId:s.audioRowId === p.id ? null : p.id, audioStatus:'idle'});\n          },"
+    );
+    template = template.replace(
+      "state = { rows: [], intensity:'Todas', query:'', faq:0, picks:[], copied:false };",
+      "state = { rows: [], intensity:'Todas', query:'', faq:0, picks:[], copied:false, visibleCount:15, audioRowId:null, audioStatus:'idle', audioUrl:'', audioTitle:'', audioArtist:'', audioStoreUrl:'', audioArtwork:'', audioError:'' };"
+    );
+    template = template.replace(
+      "\n  renderVals(){",
+      `
+  searchApplePreview(p, country, requestId){
+    return new Promise(resolve => {
+      const callbackName = '__marilynasPreview' + Date.now() + '_' + requestId + '_' + country;
+      const script = document.createElement('script');
+      let settled = false;
+      let timer = null;
+      const finish = data => {
+        if(settled) return;
+        settled = true;
+        if(timer) clearTimeout(timer);
+        try { delete window[callbackName]; } catch(_) { window[callbackName] = undefined; }
+        if(script.parentNode) script.parentNode.removeChild(script);
+        resolve(data || null);
+      };
+      window[callbackName] = finish;
+      script.onerror = () => finish(null);
+      timer = setTimeout(() => finish(null), 7000);
+      script.src = 'https://itunes.apple.com/search?term='
+        + encodeURIComponent(p.song + ' ' + p.artist)
+        + '&country=' + country
+        + '&media=music&entity=song&limit=25&callback=' + callbackName;
+      document.head.appendChild(script);
+    });
+  }
+
+  async loadPreview(p, e){
+    if(e && e.preventDefault) e.preventDefault();
+    if(e && e.stopPropagation) e.stopPropagation();
+    if(this.state.audioRowId === p.id){
+      this.previewRequest = (this.previewRequest || 0) + 1;
+      this.setState({audioRowId:null, audioStatus:'idle', audioUrl:'', audioStoreUrl:'', audioArtwork:'', audioError:''});
+      return;
+    }
+
+    this.previewCache = this.previewCache || {};
+    const cacheKey = this.norm(p.song + ' ' + p.artist);
+    const cached = this.previewCache[cacheKey];
+    if(cached){
+      this.setState(Object.assign({audioRowId:p.id}, cached));
+      return;
+    }
+
+    this.previewRequest = (this.previewRequest || 0) + 1;
+    const requestId = this.previewRequest;
+    this.setState({audioRowId:p.id, audioStatus:'loading', audioUrl:'', audioTitle:p.song, audioArtist:p.artist, audioStoreUrl:'', audioArtwork:'', audioError:''});
+
+    const fail = () => {
+      if(this.previewRequest !== requestId) return;
+      const result = {audioStatus:'error', audioUrl:'', audioTitle:p.song, audioArtist:p.artist, audioStoreUrl:'', audioArtwork:'', audioError:'No encontramos una muestra de audio disponible para este tema.'};
+      this.previewCache[cacheKey] = result;
+      this.setState(Object.assign({audioRowId:p.id}, result));
+    };
+
+    const targetSong = this.norm(p.song);
+    const targetArtist = this.norm(p.artist);
+    const score = r => {
+      const song = this.norm(r.trackName || '');
+      const artist = this.norm(r.artistName || '');
+      let value = song === targetSong ? 12 : ((song.includes(targetSong) || targetSong.includes(song)) ? 7 : 0);
+      value += artist === targetArtist ? 7 : ((artist.includes(targetArtist) || targetArtist.includes(artist)) ? 4 : 0);
+      return value;
+    };
+
+    let candidates = [];
+    for(const country of ['AR','US','ES']){
+      if(this.previewRequest !== requestId) return;
+      const data = await this.searchApplePreview(p, country, requestId);
+      candidates = candidates.concat(((data && data.results) || []).filter(r => r && r.previewUrl));
+      candidates.sort((a,b) => score(b) - score(a));
+      if(candidates.length && score(candidates[0]) >= 7) break;
+    }
+
+    if(this.previewRequest !== requestId) return;
+    candidates.sort((a,b) => score(b) - score(a));
+    const match = candidates.find(r => score(r) >= 7);
+    if(!match){ fail(); return; }
+
+    const result = {
+      audioStatus:'ready',
+      audioUrl:match.previewUrl,
+      audioTitle:match.trackName || p.song,
+      audioArtist:match.artistName || p.artist,
+      audioStoreUrl:match.trackViewUrl || '',
+      audioArtwork:(match.artworkUrl100 || '').replace('100x100bb', '200x200bb'),
+      audioError:''
+    };
+    this.previewCache[cacheKey] = result;
+    this.setState(Object.assign({audioRowId:p.id}, result));
+  }
+
+  renderVals(){`
+    );
+    template = template.replace(
+      "const list = this.filtered();",
+      "const allFiltered = this.filtered();\n    const list = allFiltered.slice(0, s.visibleCount);"
+    );
+    template = template.replace(
+      "isEmpty: s.rows.length > 0 && list.length === 0,",
+      "isEmpty: s.rows.length > 0 && allFiltered.length === 0,\n      hasMore: list.length < allFiltered.length,\n      loadMore: () => this.setState({visibleCount:s.visibleCount + 15}),"
+    );
+    template = template.replace(
+      "resultLabel: s.rows.length === 0\n        ? 'Cargando el catálogo…'\n        : (list.length === s.rows.length\n            ? s.rows.length + ' canciones · tocá las que te gusten'\n            : list.length + (list.length === 1 ? ' canción' : ' canciones') + ' de ' + s.rows.length),",
+      "resultLabel: s.rows.length === 0\n        ? 'Cargando el catálogo…'\n        : (list.length < allFiltered.length\n            ? 'Mostrando ' + list.length + ' de ' + allFiltered.length + ' canciones'\n            : (allFiltered.length === s.rows.length\n                ? allFiltered.length + ' canciones · tocá las que te gusten'\n                : allFiltered.length + (allFiltered.length === 1 ? ' canción' : ' canciones') + ' de ' + s.rows.length)),"
+    );
+    template = template.replace(
+      "setQuery: e => this.setState({query: e.target.value}),",
+      "setQuery: e => this.setState({query: e.target.value, visibleCount:15}),"
+    );
+    template = template.replace(
+      "clearFilters: () => this.setState({intensity:'Todas', query:''}),",
+      "clearFilters: () => this.setState({intensity:'Todas', query:'', visibleCount:15}),"
+    );
+    template = template.replace(
+      "pick: () => this.setState({intensity:l}),",
+      "pick: () => this.setState({intensity:l, visibleCount:15}),"
+    );
+    template = template.replace(
+      '<p style="margin:12px 4px 0;text-align:center;font:400 12px \'Work Sans\',system-ui,sans-serif;color:rgba(34,30,26,.42)">{{ resultLabel }}</p>',
+      '<sc-if value="{{ hasMore }}" hint-placeholder-val="{{ true }}"><div style="display:flex;justify-content:center;padding:20px 0 4px"><button type="button" sc-camel-on-click="{{ loadMore }}" style="border:1px solid rgba(34,30,26,.18);background:#FFFDFA;color:#221E1A;padding:12px 24px;border-radius:100px;cursor:pointer;font:600 12.5px \'Work Sans\',system-ui,sans-serif" style-hover="background:#221E1A;color:#FAF5EE">Seguir leyendo</button></div></sc-if>\n      <p style="margin:12px 4px 0;text-align:center;font:400 12px \'Work Sans\',system-ui,sans-serif;color:rgba(34,30,26,.42)">{{ resultLabel }}</p>'
+    );
+    template = template.replace(
+      '<meta name="viewport" content="width=device-width, initial-scale=1">',
+      '<meta name="viewport" content="width=device-width, initial-scale=1">\n<meta name="referrer" content="strict-origin-when-cross-origin">\n<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 32 32\'%3E%3Crect width=\'32\' height=\'32\' rx=\'8\' fill=\'%23B4552E\'/%3E%3Cpath d=\'M20 7v12.2a4.2 4.2 0 1 1-2-3.58V9l8-2v10.2a4.2 4.2 0 1 1-2-3.58V9.55L20 10.6V7z\' fill=\'%23FAF5EE\'/%3E%3C/svg%3E">\n<title>Catálogo de coreografías | Marilynas Online</title>'
+    );
+    return template;
+  }
+
   // Error sink persists across replaceWith since it's on window, not the DOM.
   window.addEventListener('error', function(e) {
     // Failed resource loads (CSP-blocked links, scripts, images) fire plain
@@ -75,7 +378,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     }
 
     const manifest = JSON.parse(manifestEl.textContent);
-    let template = JSON.parse(templateEl.textContent);
+    let template = updateMarilynasCatalog(JSON.parse(templateEl.textContent));
 
     // Nested page bundles (iframe targets). Each ships ONCE, in the ROOT
     // document's manifest; frame srcs carry an about:blank#<uuid> marker
