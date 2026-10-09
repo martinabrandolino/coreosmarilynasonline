@@ -3,8 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="referrer" content="strict-origin-when-cross-origin">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23B4552E'/%3E%3Cpath d='M20 7v12.2a4.2 4.2 0 1 1-2-3.58V9l8-2v10.2a4.2 4.2 0 1 1-2-3.58V9.55L20 10.6V7z' fill='%23FAF5EE'/%3E%3C/svg%3E">
-  <title>Catálogo de coreografías | Marilynas Online</title>
+  <title>Bundled Page</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { background: #FAF5EE; display: flex; align-items: center; justify-content: center; min-height: 100vh; font-family: -apple-system, BlinkMacSystemFont, sans-serif; }
@@ -201,7 +200,7 @@ document.addEventListener('DOMContentLoaded', async function() {
       '<button type="button" sc-camel-on-click="{{ p.listen }}" title="Escuchar {{ p.song }} aquí" aria-label="Escuchar {{ p.song }} aquí de {{ p.artist }}" style="width:34px;height:34px;display:grid;place-items:center;justify-self:center;border:1px solid rgba(34,30,26,.14);border-radius:50%;background:#FAF5EE;color:#B4552E;font:700 11px/1 system-ui,sans-serif;cursor:pointer;transition:.15s" style-hover="background:#B4552E;color:#FAF5EE;border-color:#B4552E">{{ p.playIcon }}</button>\n            <span style="{{ p.checkStyle }}">✓</span>\n            <sc-if value="{{ p.playerVisible }}" hint-placeholder-val="{{ false }}">\n              <div sc-camel-on-click="{{ p.stopAudioClick }}" style="grid-column:2/-1;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:12px;align-items:center;margin:2px 0 4px;padding:13px 14px;border-radius:14px;background:#F3EADC;cursor:default">\n                <div style="width:46px;height:46px;border-radius:10px;overflow:hidden;background:#E7DAC8;display:grid;place-items:center;color:#B4552E;font-size:17px"><sc-if value="{{ p.hasArtwork }}" hint-placeholder-val="{{ true }}"><img src="{{ p.audioArtwork }}" alt="" width="46" height="46" style="display:block;width:46px;height:46px;object-fit:cover"></sc-if><sc-if value="{{ p.noArtwork }}" hint-placeholder-val="{{ false }}">♫</sc-if></div>\n                <div style="min-width:0">\n                  <p style="margin:0 0 3px;font:600 12.5px/1.3 \'Work Sans\',system-ui,sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ p.audioTitle }}</p>\n                  <p style="margin:0 0 8px;font:400 11px/1.3 \'Work Sans\',system-ui,sans-serif;color:rgba(34,30,26,.52)">{{ p.audioMessage }}</p>\n                  <sc-if value="{{ p.playerReady }}" hint-placeholder-val="{{ true }}"><audio controls autoplay preload="none" src="{{ p.audioUrl }}" style="display:block;width:100%;height:32px;max-width:440px"></audio><p style="margin:7px 0 0;font:400 9.5px/1.3 \'Work Sans\',system-ui,sans-serif;color:rgba(34,30,26,.42)">Escuchando aquí · muestra de 30 segundos · <a href="{{ p.audioStoreUrl }}" target="_blank" rel="noopener" style="color:#B4552E;text-decoration:underline">Apple Music</a></p></sc-if>\n                </div>\n                <button type="button" sc-camel-on-click="{{ p.closeAudio }}" aria-label="Cerrar reproductor" style="align-self:start;width:28px;height:28px;border:0;border-radius:50%;background:rgba(34,30,26,.08);color:#221E1A;cursor:pointer;font:500 16px/1 system-ui,sans-serif">×</button>\n              </div>\n            </sc-if>'
     );
     template = template.replace(
-      /<sc-if value="\{\{ p\.playerVisible \}\}"[\s\S]*?\n              <\/div>\n            <\/sc-if>/,
+      /<sc-if value="\{\{ p\.playerVisibleNever \}\}"[\s\S]*?\n              <\/div>\n            <\/sc-if>/,
       '<sc-if value="{{ p.playerVisible }}" hint-placeholder-val="{{ false }}">\n              <div sc-camel-on-click="{{ p.stopAudioClick }}" style="grid-column:2/-1;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:start;margin:2px 0 4px;padding:13px 14px;border-radius:14px;background:#F3EADC;cursor:default">\n                <div style="min-width:0">\n                  <p style="margin:0 0 10px;font:600 12.5px/1.35 \'Work Sans\',system-ui,sans-serif;color:#221E1A">{{ p.song }} <span style="font-weight:400;color:rgba(34,30,26,.52)">· {{ p.artist }}</span></p>\n                  <div style="position:relative;width:100%;max-width:620px;aspect-ratio:16/9;overflow:hidden;border-radius:11px;background:#221E1A">\n                    <iframe src="{{ p.embedUrl }}" title="Reproductor de {{ p.song }}" referrerpolicy="strict-origin-when-cross-origin" allow="autoplay; encrypted-media; picture-in-picture; web-share" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;border:0"></iframe>\n                  </div>\n                  <p style="margin:8px 0 0;font:400 9.5px/1.3 \'Work Sans\',system-ui,sans-serif;color:rgba(34,30,26,.42)">La reproducción se mantiene dentro del catálogo.</p>\n                </div>\n                <button type="button" sc-camel-on-click="{{ p.closeAudio }}" aria-label="Cerrar reproductor" style="width:28px;height:28px;border:0;border-radius:50%;background:rgba(34,30,26,.08);color:#221E1A;cursor:pointer;font:500 16px/1 system-ui,sans-serif">×</button>\n              </div>\n            </sc-if>'
     );
     template = template.replace(
@@ -213,7 +212,7 @@ document.addEventListener('DOMContentLoaded', async function() {
       "playerVisible: s.audioRowId === p.id,\n          embedUrl: s.audioRowId === p.id && p.videoId ? 'https://www.youtube.com/embed/' + p.videoId + '?autoplay=1&playsinline=1&rel=0&enablejsapi=1' + (/^https?:$/.test(window.location.protocol) ? '&origin=' + encodeURIComponent(window.location.origin) + '&widget_referrer=' + encodeURIComponent(window.location.href) : '') : '',"
     );
     template = template.replace(
-      "listen: e => this.loadPreview(p, e),",
+      "listen: e => this.loadPreviewDisabled(p, e),",
       "listen: e => {\n            if(e && e.preventDefault) e.preventDefault();\n            if(e && e.stopPropagation) e.stopPropagation();\n            this.previewRequest = (this.previewRequest || 0) + 1;\n            this.setState({audioRowId:s.audioRowId === p.id ? null : p.id, audioStatus:'idle'});\n          },"
     );
     template = template.replace(
@@ -343,64 +342,85 @@ document.addEventListener('DOMContentLoaded', async function() {
       '<p style="margin:12px 4px 0;text-align:center;font:400 12px \'Work Sans\',system-ui,sans-serif;color:rgba(34,30,26,.42)">{{ resultLabel }}</p>',
       '<sc-if value="{{ hasMore }}" hint-placeholder-val="{{ true }}"><div style="display:flex;justify-content:center;padding:20px 0 4px"><button type="button" sc-camel-on-click="{{ loadMore }}" style="border:1px solid rgba(34,30,26,.18);background:#FFFDFA;color:#221E1A;padding:12px 24px;border-radius:100px;cursor:pointer;font:600 12.5px \'Work Sans\',system-ui,sans-serif" style-hover="background:#221E1A;color:#FAF5EE">Seguir leyendo</button></div></sc-if>\n      <p style="margin:12px 4px 0;text-align:center;font:400 12px \'Work Sans\',system-ui,sans-serif;color:rgba(34,30,26,.42)">{{ resultLabel }}</p>'
     );
-
-    // Clases de apoyo y ajustes responsive para que la interfaz se adapte a celulares.
-    template = template.replace('<header style="position:sticky', '<header class="site-header" style="position:sticky');
-    template = template.replace('<span style="display:flex;align-items:baseline;gap:8px 14px;flex-wrap:wrap;min-width:0">', '<span class="site-brand" style="display:flex;align-items:baseline;gap:8px 14px;flex-wrap:wrap;min-width:0">');
-    template = template.replace('<span style="font:500 10.5px \'Work Sans\',system-ui,sans-serif;letter-spacing:.22em;text-transform:uppercase;color:rgba(34,30,26,.45)">Catálogo de coreografías</span>', '<span class="site-tagline" style="font:500 10.5px \'Work Sans\',system-ui,sans-serif;letter-spacing:.22em;text-transform:uppercase;color:rgba(34,30,26,.45)">Catálogo de coreografías</span>');
-    template = template.replace('<nav style="display:flex;align-items:center;gap:22px">', '<nav class="site-nav" style="display:flex;align-items:center;gap:22px">');
-    template = template.replace('<section style="padding: clamp(30px,7vw,52px) clamp(16px,4vw,28px) 30px; text-align: center; position: static">', '<section class="hero" style="padding: clamp(30px,7vw,52px) clamp(16px,4vw,28px) 30px; text-align: center; position: static">');
-    template = template.replace('<section style="padding:0 clamp(16px,4vw,28px) 16px;display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap">', '<section class="catalog-controls" style="padding:0 clamp(16px,4vw,28px) 16px;display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap">');
-    template = template.replace('<div style="display:flex;align-items:center;gap:9px;height:42px;padding:0 17px;border-radius:100px;background:#FFFDFA;border:1px solid rgba(34,30,26,.12);min-width:min(250px,100%);flex:1 1 250px;max-width:420px">', '<div class="search-box" style="display:flex;align-items:center;gap:9px;height:42px;padding:0 17px;border-radius:100px;background:#FFFDFA;border:1px solid rgba(34,30,26,.12);min-width:min(250px,100%);flex:1 1 250px;max-width:420px">');
-    template = template.replace('<div style="display:flex;gap:6px;flex-wrap:wrap">', '<div class="filter-buttons" style="display:flex;gap:6px;flex-wrap:wrap">');
-    template = template.replace('<section style="padding:0 clamp(16px,4vw,28px) 16px;display:flex;justify-content:center;gap:14px 22px;flex-wrap:wrap">', '<section class="legend-row" style="padding:0 clamp(16px,4vw,28px) 16px;display:flex;justify-content:center;gap:14px 22px;flex-wrap:wrap">');
-    template = template.replace('<section style="padding:0 clamp(16px,4vw,28px)">', '<section class="catalog-section" style="padding:0 clamp(16px,4vw,28px)">');
-    template = template.replace('<div style="background:#FFFDFA;border:1px solid rgba(34,30,26,.1);border-radius:18px;overflow:hidden;box-shadow:0 1px 2px rgba(34,30,26,.04),0 12px 32px -18px rgba(34,30,26,.22)">', '<div class="catalog-card" style="background:#FFFDFA;border:1px solid rgba(34,30,26,.1);border-radius:18px;overflow:hidden;box-shadow:0 1px 2px rgba(34,30,26,.04),0 12px 32px -18px rgba(34,30,26,.22)">');
-    template = template.replace('<div style="display:grid;grid-template-columns:14px minmax(0,1fr) 42px 26px;gap:12px;align-items:center;padding:11px clamp(14px,3.5vw,22px);background:#F7F1E8;', '<div class="catalog-head" style="display:grid;grid-template-columns:14px minmax(0,1fr) 42px 26px;gap:12px;align-items:center;padding:11px clamp(14px,3.5vw,22px);background:#F7F1E8;');
-    template = template.replace('<div sc-camel-on-click="{{ p.toggle }}" style="{{ p.rowStyle }}"', '<div class="song-row" sc-camel-on-click="{{ p.toggle }}" style="{{ p.rowStyle }}"');
-    template = template.replace('<span style="min-width:0;display:flex;align-items:baseline;gap:9px;flex-wrap:wrap">', '<span class="song-copy" style="min-width:0;display:flex;align-items:baseline;gap:9px;flex-wrap:wrap">');
-    template = template.replace('<div sc-camel-on-click="{{ p.stopAudioClick }}" style="grid-column:2/-1;display:grid;', '<div class="inline-player" sc-camel-on-click="{{ p.stopAudioClick }}" style="grid-column:2/-1;display:grid;');
-    template = template.replace('</helmet>', `<style>
-      html,body{max-width:100%;overflow-x:hidden}
-      iframe{max-width:100%}
-      @media (max-width:640px){
-        .site-header{display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;align-items:center!important;flex-wrap:nowrap!important;gap:8px!important;padding:10px 14px!important}
-        .site-brand{display:block!important;min-width:0!important;white-space:nowrap!important}
-        .site-brand>span:first-child{gap:6px!important;white-space:nowrap!important}
-        .site-brand>span:first-child>span{font-size:20px!important}
-        .site-tagline{display:none!important}
-        .site-nav{gap:8px!important;margin-left:auto!important}
-        .site-nav a:first-child{display:none!important}
-        .site-nav a:last-child{padding:9px 13px!important;font-size:11px!important;white-space:nowrap!important}
-        .hero{padding:24px 14px 20px!important}
-        .hero h1{max-width:10ch!important;font-size:clamp(38px,12vw,50px)!important;line-height:.96!important}
-        .hero p{margin-top:14px!important;padding:0 12px!important;font-size:12.5px!important}
-        .catalog-controls{display:grid!important;grid-template-columns:minmax(0,1fr)!important;padding:0 12px 12px!important;gap:9px!important}
-        .search-box{width:100%!important;min-width:0!important;max-width:none!important;flex-basis:auto!important}
-        .filter-buttons{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;width:100%!important;gap:6px!important}
-        .filter-buttons button{justify-content:center!important;min-width:0!important;padding:10px 5px!important;font-size:11px!important;gap:6px!important}
-        .legend-row{padding:0 14px 14px!important;gap:8px 12px!important}
-        .legend-row>span{font-size:10px!important}
-        .catalog-section{padding:0 10px!important}
-        .catalog-card{border-radius:14px!important}
-        .catalog-head{grid-template-columns:10px minmax(0,1fr) 36px 14px!important;gap:8px!important;padding:10px 12px!important}
-        .song-row{grid-template-columns:10px minmax(0,1fr) 36px 14px!important;gap:8px!important;padding:12px!important}
-        .song-copy{align-items:flex-start!important;flex-direction:column!important;gap:3px!important}
-        .song-copy>span:first-child{font-size:14px!important;line-height:1.25!important;overflow-wrap:anywhere!important}
-        .song-copy>span:last-child{font-size:11.5px!important;line-height:1.3!important}
-        .song-row>button{width:32px!important;height:32px!important}
-        .inline-player{grid-column:1/-1!important;margin-top:5px!important;padding:10px!important;gap:8px!important}
-        .inline-player iframe{width:100%!important;max-width:100%!important}
-      }
-      @media (max-width:360px){
-        .filter-buttons{grid-template-columns:repeat(2,minmax(0,1fr))!important}
-        .legend-row{justify-content:flex-start!important}
-      }
-    </style>\n</helmet>`);
     template = template.replace(
       '<meta name="viewport" content="width=device-width, initial-scale=1">',
-      '<meta name="viewport" content="width=device-width, initial-scale=1">\n<meta name="referrer" content="strict-origin-when-cross-origin">\n<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 32 32\'%3E%3Crect width=\'32\' height=\'32\' rx=\'8\' fill=\'%23B4552E\'/%3E%3Cpath d=\'M20 7v12.2a4.2 4.2 0 1 1-2-3.58V9l8-2v10.2a4.2 4.2 0 1 1-2-3.58V9.55L20 10.6V7z\' fill=\'%23FAF5EE\'/%3E%3C/svg%3E">\n<title>Catálogo de coreografías | Marilynas Online</title>'
+      '<meta name="viewport" content="width=device-width, initial-scale=1">\n<meta name="referrer" content="strict-origin-when-cross-origin">\n<title>Catálogo de coreografías | Marilynas Online</title>'
     );
+    return improveMarilynasCatalog(template);
+  }
+
+
+  function improveMarilynasCatalog(template) {
+    // Keep the palette and hierarchy while improving the reading contrast.
+    template = template.replace(/color:\s*rgba\(34,\s*30,\s*26,\s*\.[0-9]+\)/g, 'color:#3B3029');
+    template = template.replace(/color:\s*rgba\(250,\s*245,\s*238,\s*\.[0-9]+\)/g, 'color:#FAF5EE');
+    template = template.replace(/(font:\s*\d+\s+)(\d+(?:\.\d+)?)px/g, (m, prefix, n) => {
+      const size=Number(n);
+      return size <= 16 ? prefix + Math.max(13.5, size + 2) + 'px' : m;
+    });
+    template = template.replace(/(font-size:\s*)(\d+(?:\.\d+)?)px/g, (m, prefix, n) => Number(n) <= 16 ? prefix + Math.max(14, Number(n)+2) + 'px' : m);
+    template = template.replace('letter-spacing:.14em;text-transform:uppercase', 'letter-spacing:.04em;text-transform:uppercase');
+    template = template.replace('height:42px;padding:0 17px', 'height:48px;padding:0 17px');
+    template = template.replace('color:#B4552E', 'color:#8C3E20');
+    const note='<aside aria-label="Sobre la música de las coreografías" style="margin:4px clamp(16px,4vw,28px) 20px;padding:16px 18px;border-radius:14px;background:#F3EADC;border:1px solid #DAC9B3;color:#221E1A;font:400 15px/1.6 Work Sans,system-ui,sans-serif"><strong>Sobre la música:</strong> la mayoría de las coreografías utiliza versiones de las canciones con la velocidad aumentada respecto de la grabación original. Las muestras del catálogo son una referencia para reconocer los temas y pueden tener una velocidad diferente a la utilizada en la coreografía.</aside>';
+    const table='<section style="padding:0 clamp(16px,4vw,28px)">';
+    if(!template.includes(table)) throw new Error('Catalog section not found');
+    template=template.replace(table,note+'\n'+table);
+    template=template.replace("  renderVals(){",String.raw`
+  inquiryMessage(){
+    const selected=this.state.picks.map(id=>this.state.rows.find(r=>r.id===id)).filter(Boolean);
+    return '¡Hola Marilynas! Quiero más información sobre los packs de coreografías.'
+      + (selected.length ? '\n\nElegí estas canciones:\n' + selected.map((p,i)=>(i+1)+'. '+p.song+' — '+p.artist).join('\n') : '')
+      + '\n\n¿Me pasás el precio y las formas de pago? ¡Gracias!';
+  }
+
+  copyInquiry(){
+    const text=this.inquiryMessage();
+    const done=()=>this.setState({copied:true});
+    const fallback=()=>{
+      const field=document.createElement('textarea');
+      field.value=text;
+      field.style.cssText='position:fixed;top:0;left:0;opacity:0;pointer-events:none';
+      document.body.appendChild(field);
+      field.select();
+      let ok=false;
+      try { ok=document.execCommand('copy'); } catch(_) {}
+      field.remove();
+      this.setState({copied:ok});
+      return ok;
+    };
+    // Copy within the user gesture; never claim a failed copy succeeded.
+    if(fallback()) return;
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(done).catch(()=>this.setState({copied:false}));
+    }
+  }
+
+  renderVals(){`);
+    const start=template.indexOf('      copyList: () => {');
+    const end=template.indexOf('      faqs: [',start);
+    if(start<0 || end<0) throw new Error('Copy action not found');
+    template=template.slice(0,start)+"      inquiryMessage: this.inquiryMessage(),\n      inquiryHint: s.copied ? 'Mensaje copiado. Pegalo en el chat de Instagram.' : 'El botón copia tu consulta y abre el DM. Pegá el mensaje en el chat.',\n      copyList: () => this.copyInquiry(),\n      consultPack: () => this.copyInquiry(),\n"+template.slice(end);
+    template=template.replace("copyLabel: s.copied ? 'Copiada ✓' : 'Copiar lista'", "copyLabel: s.copied ? 'Mensaje copiado ✓' : 'Copiar mensaje'");
+    template=template.replace("'padding-bottom:190px'", "'padding-bottom:280px'");
+    // Keep the profile link; route the consultation links to the DM.
+    template=template.replace(/<a href="https:\/\/www\.instagram\.com\/marilynasonline\/" target="_blank" rel="noopener" sc-camel-on-click="\{\{ openIg \}\}"([^>]+)>Mandármela →<\/a>/,
+      '<a href="https://ig.me/m/marilynasonline" target="_blank" rel="noopener" sc-camel-on-click="{{ consultPack }}"$1>Consultar pack por DM →</a>');
+    template=template.replace(/<a href="https:\/\/www\.instagram\.com\/marilynasonline\/" target="_blank" rel="noopener" sc-camel-on-click="\{\{ openIg \}\}"([^>]+)>Mandame un mensajito <span>→<\/span><\/a>/,
+      '<a href="https://ig.me/m/marilynasonline" target="_blank" rel="noopener" sc-camel-on-click="{{ consultPack }}"$1>Consultame por DM <span>→</span></a>');
+    const beforePicks='<div style="display:flex;gap:7px;flex-wrap:wrap;margin-top:14px">';
+    const help='<p role="status" aria-live="polite" style="margin:12px 0 0;font:400 13.5px/1.5 Work Sans,system-ui,sans-serif;color:#FAF5EE">{{ inquiryHint }}</p><details style="margin-top:8px;font:400 13.5px/1.5 Work Sans,system-ui,sans-serif"><summary style="cursor:pointer">Ver mensaje para Instagram</summary><textarea readonly aria-label="Mensaje de consulta para copiar" value="{{ inquiryMessage }}" style="display:block;width:100%;height:110px;margin-top:8px;padding:10px;border:1px solid #DAC9B3;border-radius:8px;font:400 14px/1.5 Work Sans,system-ui,sans-serif;color:#221E1A;background:#FAF5EE"></textarea></details>';
+    template=template.replace(beforePicks,help+'\n'+beforePicks);
+    template=template.replace('display:flex;gap:8px', 'display:flex;gap:8px;flex-wrap:wrap');
+    template=template.replace(beforePicks, '<div style="display:flex;gap:7px;flex-wrap:wrap;margin-top:14px;max-height:88px;overflow:auto">');
+    template=template.replace('pointer-events:auto;width:100%;max-width:660px', 'pointer-events:auto;width:100%;max-width:660px;max-height:50vh;overflow:auto');
+    template=template.replace('Marcás las que te gusten y se van sumando a una lista. Copiás la lista y me la mandás por privado, te paso el precio y las formas de pago, y cuando el pago se acredita te llega el link con los videos.', 'Marcás las canciones que te gusten y tocás Consultar pack por DM. El botón copia un mensaje con tu selección y abre Instagram: pegalo en el chat y enviámelo. Te paso el precio y las formas de pago, y cuando se acredita el pago te llega el link con los videos.');
+    template=template.replace("{q:'¿Qué son los colorcitos?'", "{q:'¿La música tiene la velocidad original?', a:'La mayoría de las coreografías utiliza versiones con la velocidad aumentada respecto de la grabación original. Las muestras del catálogo sirven para reconocer cada tema y pueden tener una velocidad diferente a la coreografía.'},\n        {q:'¿Qué son los colorcitos?'");
+    template=template.replace(/<button sc-camel-on-click="\{\{ copyList \}\}"[^>]*>[\s\S]*?<\/button>/, '');
+    template=template.replace('Consultar pack por DM →', 'Copiar mensaje y abrir Instagram →');
+    template=template.replace('white-space:nowrap" style-hover="background:#FAF5EE', 'white-space:normal;text-align:center" style-hover="background:#FAF5EE');
+    template=template.replace('tocás Consultar pack por DM.', 'tocás Copiar mensaje y abrir Instagram.');
+    template=template.replace(/(<section id="contacto"[\s\S]*?<div style="display:flex;flex-direction:column;gap:10px">)[\s\S]*?(<\/div>\s*<\/section>)/, '$1<a href="https://ig.me/m/marilynasonline" target="_blank" rel="noopener" sc-camel-on-click="{{ consultPack }}" style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 22px;background:#FAF5EE;color:#221E1A;border-radius:100px;font:600 15px Work Sans,system-ui,sans-serif" style-hover="background:#E0975F;color:#221E1A">Escribime por Instagram <span>→</span></a><p style="margin:4px 8px 0;font:400 14px/1.5 Work Sans,system-ui,sans-serif;color:#FAF5EE">@marilynasonline</p>$2');
     return template;
   }
 
